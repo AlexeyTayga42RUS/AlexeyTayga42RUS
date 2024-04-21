@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Итоговый демодень Гурьев Алексей Геннадьевич</title>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <script>
+        'use strict'
+        // Объявление класса Товар
+        class Items {
+          constructor(articleNumber, itemName, itemDescription, fullPrice, discountedPrice) {
+                this.articleNumber = articleNumber; // Артикул
+                this.itemName = itemName; // Наименование товара
+                this.itemDescription = itemDescription; // Описание товара  
+                this.fullPrice = fullPrice; // Цена без скидки
+                this.discountedPrice = discountedPrice; // Цена со скидкой (скидка на конкретный товар может и отсутствовать)
+          };
+
+          // Метод для вывода данных Товара
+          toString() {
+                return `${this.articleNumber} ${this.itemName} ${this.itemDescription} ${this.fullPrice} ${this.discountedPrice}`;
+          };     
+        };
+
+        // Объявление классов товаров
+        let item1 = new Items(1, 'Фары передние', 'Фары передние Koito', 6400, 6000);                          // Товар №1
+        let item2 = new Items(2, 'Фары задние', 'Фары задние Nismo', 3800, 3500);                              // Товар №2
+        let item3 = new Items(3, 'Диски тормозные передние', 'Диски тормозные передние Brembo', 16400, 15000); // Товар №3
+        let item4 = new Items(4, 'Диски тормозные задние', 'Диски тормозные задние Brembo', 12400, 10000);     // Товар №4
+        let item5 = new Items(5, 'Тормозные колодки', 'Колодки тормозные Nishinbo', 4600, 4000);               // Товар №5
+        let items = [item1, item2, item3, item4, item5];
+
+
+        // Объявление класса Каталог
+        class Catalogue {
+          constructor(items = []) {
+                this.items = [];
+          }
+
+          toString() {
+                return `${this.items}`;
+          };
+          
+          // Метод поиска по Артикулу
+          getItemById(articleNumber) {
+            for (let i = 0; i < this.items.length; i++) {
+              if (this.items[i].articleNumber === articleNumber) {
+                return this.items[i];
+              }
+            }
+          };
+          
+          getItems() {
+            return this.items;
+          }
+        };
+
+        // Объявляем класс Избранное, наследование класса Каталог
+        class Favorites extends Catalogue {
+         
+          // Добавление Товара
+          addItem(items) {
+            return this.items.push(items);
+          }
+
+          // Удаление Товара по Артикулу
+          removeItem(articleNumber) {
+            for (let i = 0; i < this.items.length; i++) {
+              if (this.items[i].articleNumber === articleNumber) {
+                this.items.splice(i, 1);
+                return;
+              }
+            }
+          }
+        };
+
+        // Объявляем класс Корзина, наследование класса Избранное
+        class Cart extends Favorites {
+          
+           // Расчёт стоимости Товаров без скидки и со скидкой
+          calcTotalSum() {
+            let totalPrice = 0;
+            let totalFinalPrice = 0;
+            for (let i = 0; i < this.items.length; i++) {
+              totalPrice += this.items[i].fullPrice;
+              totalFinalPrice += this.items[i].discountedPrice;
+            }  
+            let totalDiscount = totalPrice - totalFinalPrice;
+            let totalPrices = `Цена:            ${totalPrice}\nЦена со скидкой: ${totalFinalPrice} \nСумма скидки:    ${totalDiscount}`
+            return totalPrices;
+          }
+        };
+
+        let catalogueOne = new Catalogue(items);
+        let favoritesOne = new Favorites(items);
+        let cartOne = new Cart(items);  
+
+        // Объявление меню Каталог, Избранное и Корзина для ввода данных        
+        let mainMenu, catalogueMenu, favoritesMenu, cartMenu; 
+
+        while (true) {
+          mainMenu = prompt('Выберите действие: \n1 - Каталог товаров \n2 - Избранное \n3 - Корзина\n4 - Выход'); // Ввод в Главном меню
+          if (mainMenu == 1) {
+            while (true) {
+              catalogueMenu = prompt(`Вы находитесь в каталоге товаров:\n${item1}\n${item2}\n${item3}\n${item4}\n${item5}\n Добавить в Избранное(1) в Корзину(2)`); // Ввод в Каталоге
+              if (catalogueMenu === '1 1') {
+                favoritesOne.addItem(item1);
+              } else if (catalogueMenu === '2 1') {
+                favoritesOne.addItem(item2);
+              } else if (catalogueMenu === '3 1') {
+                favoritesOne.addItem(item3);
+              } else if (catalogueMenu === '4 1') {
+                favoritesOne.addItem(item4);
+              } else if (catalogueMenu === '5 1') {
+                favoritesOne.addItem(item5);
+              } else if (catalogueMenu === '1 2') {
+                cartOne.addItem(item1);
+              } else if (catalogueMenu === '2 2') {
+                cartOne.addItem(item2);
+              } else if (catalogueMenu === '3 2') {
+                cartOne.addItem(item3);
+              } else if (catalogueMenu === '4 2') {
+                cartOne.addItem(item4);
+              } else if (catalogueMenu === '5 2') {
+                cartOne.addItem(item5);
+              } else if (catalogueMenu === null) {
+                break;
+              };
+            };
+          } else if (mainMenu == 2) {
+            while (true) {
+              favoritesMenu = prompt(`Вы находитесь в Избранном. \n${favoritesOne}\nВыберите товар для  удаления`); // Ввод в Избранном
+              favoritesOne.removeItem(Number(favoritesMenu));
+              if (favoritesMenu === null) {
+                break;
+              };
+            }
+          } else if (mainMenu == 3) {
+            while (true) {
+              cartMenu = prompt(`Вы находитесь в Корзине. \n${cartOne}\nВыберите товар для удаления\n${cartOne.calcTotalSum()}`); // Ввод в Корзине
+              cartOne.removeItem(Number(cartMenu));
+              if (cartMenu === null) {
+                break;
+              };
+            }
+          } else if (mainMenu == 4) {
+            break;
+          }
+        };  
+
+        let cart1 = [];
+        cart1 = cartOne.map(getItem())
+
+        // Вывод результатов в консоль
+        console.log('------------------------------------------------------------Каталог товаров------------------------------------------------');
+        console.table(items);
+        console.log('--------------------------------------------------------------Избранное----------------------------------------------------');
+        console.table(favoritesOne);
+        console.log('----------------------------------------------------------------Корзина----------------------------------------------------');
+        console.table(cart1);
+        console.log('---------------------------------------------------------------Стоимость----------------------------------------------------');
+        console.table(cartOne.calcTotalSum());
+
+    </script>
+  </body>
+</html>
