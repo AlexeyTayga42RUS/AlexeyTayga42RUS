@@ -1,0 +1,56 @@
+1.Информацию по всем пользователям, 
+зарегистрированных в системе
+
+SELECT * 
+FROM CLIENT_CARD;
+
+2.Информацию по всем пользователям,
+относящихся к определенной возрастной группе
+
+SELECT *
+FROM CLIENT_CARD
+WHERE BIRTH_DATE BETWEEN (SYSDATE-18*365) AND (SYSDATE-12*365);
+
+3.Информацию по конкретному пользователю
+
+SELECT *
+FROM CLIENT_CARD
+WHERE LAST_NAME = 'Волкова';
+
+4.Информацию по всем печатным материалам
+
+SELECT * 
+FROM CARD_OF_PM;
+
+5.Информацию по всем печатным материалам, 
+относящихся к определенному типу
+
+SELECT *
+FROM CARD_OF_PM
+WHERE ID_TYPE_OF_PM = 30;
+
+6.Информацию по конкретному печатному материалу
+
+SELECT *
+FROM CARD_OF_PM
+WHERE TITLE = 'Собачье сердце';
+
+7.Информацию по всем жанрам, 
+отсортированных в алфавитном порядке
+
+SELECT *
+FROM GENRES_OF_PM
+ORDER BY TITLE ASC;
+
+8.Информацию по всем существующим возрастным ограничениям, 
+отсортированных по возрасту в порядке возрастания
+
+SELECT *
+FROM LIMITATIONS
+ORDER BY AGE ASC;
+
+9.Вывести идентификаторы пользователей,
+находящихся в черном списке
+
+SELECT ID_CLIENT
+FROM JOURNAL_OF_VIOLATIONS WHERE ID_VIOLATION=61;
