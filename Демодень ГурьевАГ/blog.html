@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"> 
+    <title>Демодень.Основы веб-разработки 2024. Гурьев А.Г.</title>
+    <link rel="normalize" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Jost:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+
+<body class="body">
+    <header class="header">
+        <div class="header_container">
+            <img class="logo_header" src="img/Logo.png" alt="logo_header">
+            <nav class="nav"> 
+                <ul class="nav_list">
+                    <li class="nav_item">
+                        <a class="nav_link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav_item">                    
+                        <a class="nav_link" href="#">About</a>
+                    </li>
+                    <li class="nav_item">
+                        <a class="nav_link" href="#">Blog</a>
+                    </li>
+                    <li class="nav_item">
+                        <a class="nav_link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav_item">
+                        <a class="nav_contact" href="#">
+                        <img class="header_contact" src="img/Contact Us -_.png"></a> 
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero_container_blog">
+                    <p class="hero_desc_about_blog">How we perform long-running 
+                        tasks using AWS services
+                    </p>
+            </div>
+        </section>
+        <section id="about_blog" class="about_blog">
+            <div class="about_blog_container">
+                <div class="about_blog_container_head">
+                    <div class="about_blog_head_image_container">
+                        <img class="Image_blog_man" src="img/Image_blog_man.png " alt="Image_blog_man">
+                        <div class="about_blog_head_text">
+                            <p class="head_about_blog_image_container_text">
+                                Renee Wells
+                            </p>
+                            <p class="head_about_blog_image_container_supporting_text">
+                                Product Designer, Quotient
+                            </p>
+                        </div>    
+                    </div>
+                    <div class="about_blog_head_date">
+                        <p class="head_about_blog_image_container_date">
+                            10 min read November 10, 2023
+                        </p>
+                    </div>
+                </div>
+                <img class="Image_blog_workplace" src="img/Image_blog_workplace.png " alt="Image_blog_workplace">
+                <div class="about_blog_content_container">
+                    <p class="about_blog_content_container_head">
+                        Depending on the input, this can result in using a lot of 
+                        processing power and time. The whole process would take approximately 
+                        5 seconds to return a result to the client. Keep in mind we’re talking 
+                        about 1 item, a contact from a contact book. After a while, a new requirement 
+                        is added. Solution must support companies that manage their contacts organized
+                        in files. We agreed to develop a web application that would support upload of
+                        dataset files, like .csv. The new web application should support third party 
+                        integrations. Some of them are the ESP/CRM services, like Mailchimp. User 
+                        does not need to see the result immediately. System can later notify the user 
+                        about the result, when the process finishes. This information is the key 
+                        that we need to leverage on when developing our solution. So here’s how we did it.
+                    </p>
+                    <div class="about_blog_content_container_main">
+                        <p class="about_blog_content_text_name">
+                            Initial approach
+                        </p>
+                        <p class="about_blog_content_text">
+                            Our initial approach went like this: The web application would read a .csv 
+                            file line-by-line and submit an array of entries to the backend REST API. 
+                            Processing is in real time, immediately after the user makes a request for 
+                            the process to start, he expects a result. Another approach is to apply 
+                            vertical scaling to AWS architecture. Meaning we used larger, more expensive 
+                            instances that have more RAM and processing power. This system worked well 
+                            for smaller datasets, maybe up to 5k entries, but for larger datasets multiple 
+                            problems arose. This solution is prone to failure due to long request time. 
+                            Also, because of some 3rd party services that aren’t optimized for large scale 
+                            loads or they don’t have batch endpoints. 3rd party services also tend to protect 
+                            their architecture from making a huge bill on their end. The whole process was 
+                            done in real-time. The request can take a lot of time hanging in there while 
+                            the backend would do all the work and return the result to the client. The 
+                            request was limited to 300 seconds (at time of writing the article) before 
+                            AWS would cancel it… Also I need to mention that the user has to wait a 
+                            few minutes to see the results. They can’t use the app during the process, 
+                            which makes for a bad user experience.
+                        </p>
+                    </div>
+                </div>
+                <div class="about_blog_content_bottom">
+                    <img class="about_blog_content_bottom_image" src="img/Image_blog_bottom.png " alt="Image_blog_bottom">
+                    <div class="about_blog_content_bottom_main">
+                        <div class="about_blog_content_bottom_links">
+                            <a href="https://www.facebook.com" target="_blank">
+                                <img class="icon" src="img/Icon_facebook.svg " alt="Icon_facebook">
+                            </a>
+                            <a href="https://www.twitter.com" target="_blank">
+                                <img class="icon" src="img/Icon_twitter.svg " alt="Icon_twitter">
+                            </a>
+                            <a href="https://www.linkedin.com" target="_blank">
+                                <img class="icon" src="img/Icon_linkedin.svg " alt="Icon_linkedin">
+                            </a>
+                            <a href="https://www.instagram.com" target="_blank">
+                                <img class="icon" src="img/Icon_instagram.svg " alt="Icon_instagram">
+                            </a>
+                            <span class="blog_content_bottom_links_text">
+                                Share this article
+                            </span>
+                        </div>
+                        <div class="about_blog_content_bottom_desc">
+                            <p class="written">
+                                Written by
+                            </p>
+                            <p class="blog_bottom_desc_name">
+                                Renee Wells
+                            </p>
+                            <p class="blog_bottom_desc_name_sub">
+                                Product Designer, Quotient    
+                            </p>
+                            <p class="blog_bottom_desc_text">
+                                Skilled in React Native, iOS and backend, 
+                                Toni has a demonstrated knowledge of the 
+                                information technology and services industry, 
+                                with plenty of hands-on experience to back it up.  
+                            </p>
+                        </div> 
+                    </div>
+                </div>
+            </div> 
+        </section>       
+    </main>
+    <footer>
+        <div class="footer_container_blog">
+            <div class="footer_top">
+                <div class="footer_top_main">
+                    <span class="footer_top_main_name">Think beyond the wave
+                    </span>
+                    <div class="footer_top_text">
+                        <div class="footer_top_text_line"><img src="img/Line 69.png"></div>
+                    <span class="footer_top_text_main">Ask about Sans products, pricing, implementation, or 
+                        anything else. Our highly trained reps are standing by, ready to help
+                    </span>
+                    </div>     
+                </div>
+                <button class="btn_hero_container">Try for free</button> 
+            </div>
+            <div class="df">
+                <label class="label_custom">
+                    <input class="checkbox_dn2" type="checkbox" />
+                    <span class="checkbox_custom2">I agree with the privacy policy of Company</span>
+                </label>
+            </div>
+            <div class="footer_container_bottom">
+                <div class="footer_container_bottom_text">
+                    <img class="logo_header" src="img/Logo.png" alt="logo_header">
+                    <p class="footer_bottom_text_main">
+                        We built an elegant solution. Our team created a fully 
+                        integrated sales and marketing solution for SMBs
+                    </p>
+                </div>
+                <div class="footer_container_columns">
+                    <nav class="nav"> 
+                        <ul class="nav_card_columns">
+                            <li class="nav_card">
+                                <span class="nav_card_column_name">Company</span>
+                                <a class="nav_card_column_link" href="#">About</a>
+                                <a class="nav_card_column_link" href="#">Pricing</a>
+                                <a class="nav_card_column_link" href="#">Jobs</a>
+                                <a class="nav_card_column_link" href="#">Blog</a>                            
+                            </li>
+                            <li class="nav_card">
+                                <span class="nav_card_column_name">Product</span>
+                                <a class="nav_card_column_link" href="#">Sales Software</a>
+                                <a class="nav_card_column_link" href="#">Marketplace</a>
+                                <a class="nav_card_column_link" href="#">Terms and Conditions</a>
+                                <a class="nav_card_column_link" href="#">Privacy Policy</a>
+                            </li>
+                            <li class="nav_card">
+                                <span class="nav_card_column_name">Discover</span>
+                                <a class="nav_card_column_link" href="#">CRM Comparision</a>
+                                <a class="nav_card_column_link" href="#">Partner Program</a>
+                                <a class="nav_card_column_link" href="#">What is CRM</a>
+                                <a class="nav_card_column_link" href="#">Resource</a>
+                            </li>  
+                            <li class="nav_card">
+                                <span class="nav_card_column_name">Help Center</span>
+                                <a class="nav_card_column_link" href="#">Community</a>
+                                <a class="nav_card_column_link" href="#">Knowledge Base</a>
+                                <a class="nav_card_column_link" href="#">Academy</a>
+                                <a class="nav_card_column_link" href="#">Support</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer_container_end">
+                <p>© Copyright 2023 All Rights Reserved</p>
+            </div>        
+        </div>
+    </footer>
+</body>
+</html>
+  
+   
